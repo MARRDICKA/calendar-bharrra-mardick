@@ -1,12 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -30,13 +22,13 @@
         </div>
 
         <button class="add-btn" id="addEventBtn">
-            + Add Event
+            <span>+</span> Add Event
         </button>
 
     </header>
 
 
-    <!-- MAIN CALENDAR -->
+    <!-- MAIN -->
     <main class="calendar-wrapper">
 
         <!-- CALENDAR -->
@@ -44,21 +36,42 @@
 
             <div class="calendar-top">
 
-                <h2 class="month-title" id="monthTitle">
-                    September 2026
-                </h2>
+                <!-- MONTH & YEAR SELECTOR -->
+                <button class="month-selector" id="monthSelector">
+                    <span id="monthTitle">
+                        September 2026
+                    </span>
 
+                    <span class="dropdown-icon">
+                        ▾
+                    </span>
+                </button>
+
+
+                <!-- NAVIGATION -->
                 <div class="navigation">
 
-                    <button class="nav-btn" id="prevMonth">
+                    <button
+                        class="nav-btn"
+                        id="prevMonth"
+                        title="Previous month"
+                    >
                         ‹
                     </button>
 
-                    <button class="nav-btn" id="todayBtn">
+                    <button
+                        class="nav-btn today-btn"
+                        id="todayBtn"
+                        title="Today"
+                    >
                         ●
                     </button>
 
-                    <button class="nav-btn" id="nextMonth">
+                    <button
+                        class="nav-btn"
+                        id="nextMonth"
+                        title="Next month"
+                    >
                         ›
                     </button>
 
@@ -67,7 +80,46 @@
             </div>
 
 
-            <!-- DAYS OF WEEK -->
+            <!-- MONTH YEAR PICKER -->
+
+            <div
+                class="month-picker"
+                id="monthPicker"
+            >
+
+                <div class="picker-header">
+
+                    <button
+                        class="picker-year-btn"
+                        id="prevYear"
+                    >
+                        ‹
+                    </button>
+
+                    <span id="pickerYear">
+                        2026
+                    </span>
+
+                    <button
+                        class="picker-year-btn"
+                        id="nextYear"
+                    >
+                        ›
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="months-grid"
+                    id="monthsGrid"
+                ></div>
+
+            </div>
+
+
+            <!-- WEEKDAYS -->
+
             <div class="weekdays">
 
                 <div class="weekday">Sun</div>
@@ -82,10 +134,15 @@
 
 
             <!-- CALENDAR -->
-            <div class="calendar" id="calendar"></div>
+
+            <div
+                class="calendar"
+                id="calendar"
+            ></div>
 
 
             <!-- LEGEND -->
+
             <div class="legend">
 
                 <div class="legend-item">
@@ -119,24 +176,34 @@
 
 
         <!-- AGENDA -->
+
         <aside class="agenda-card">
 
             <div class="agenda-header">
 
                 <div>
+
                     <h2>Agenda</h2>
 
-                    <p class="agenda-date" id="agendaDate">
+                    <p
+                        class="agenda-date"
+                        id="agendaDate"
+                    >
                         Select a date
                     </p>
+
                 </div>
 
             </div>
 
-            <div class="agenda-list" id="agendaList">
+
+            <div
+                class="agenda-list"
+                id="agendaList"
+            >
 
                 <div class="empty">
-                    Click a date to see the agenda
+                    Click a date to add an event
                 </div>
 
             </div>
@@ -149,17 +216,32 @@
 
 
 <!-- EVENT MODAL -->
-<div class="modal" id="eventModal">
+
+<div
+    class="modal"
+    id="eventModal"
+>
 
     <div class="modal-box">
 
         <div class="modal-header">
 
-            <h2 id="modalTitle">
-                Add Event
-            </h2>
+            <div>
 
-            <button class="close-btn" id="closeModal">
+                <h2 id="modalTitle">
+                    Add Event
+                </h2>
+
+                <p class="modal-subtitle">
+                    Create a new calendar event
+                </p>
+
+            </div>
+
+            <button
+                class="close-btn"
+                id="closeModal"
+            >
                 ×
             </button>
 
@@ -168,7 +250,8 @@
 
         <form id="eventForm">
 
-            <!-- EVENT TITLE -->
+            <!-- TITLE -->
+
             <div class="form-group">
 
                 <label for="eventTitle">
@@ -186,6 +269,7 @@
 
 
             <!-- DATE -->
+
             <div class="form-group">
 
                 <label for="eventDate">
@@ -202,6 +286,7 @@
 
 
             <!-- TIME -->
+
             <div class="form-group">
 
                 <label for="eventTime">
@@ -217,6 +302,7 @@
 
 
             <!-- CATEGORY -->
+
             <div class="form-group">
 
                 <label for="eventCategory">
@@ -251,6 +337,7 @@
 
 
             <!-- DESCRIPTION -->
+
             <div class="form-group">
 
                 <label for="eventDescription">
@@ -266,7 +353,8 @@
             </div>
 
 
-            <!-- BUTTON -->
+            <!-- ACTION -->
+
             <div class="form-actions">
 
                 <button
@@ -295,7 +383,5 @@
 
 <script src="script.js"></script>
 
-</body>
-</html>
 </body>
 </html>
