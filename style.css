@@ -1,0 +1,762 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+
+body {
+    min-height: 100vh;
+    background: #071426;
+    color: #ffffff;
+    padding: 30px;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    max-width: 1250px;
+    margin: auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 20px;
+}
+
+
+.title-area h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+
+.title-area p {
+    color: #8ea4c3;
+    margin-top: 5px;
+}
+
+
+/* ADD BUTTON */
+
+.add-btn {
+    background: #2563eb;
+    border: none;
+    color: white;
+    padding: 13px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+
+.add-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.calendar-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+}
+
+
+.calendar-card,
+.agenda-card {
+    background: #0d1b2f;
+    border: 1px solid #1d304b;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+
+.calendar-card {
+    padding: 25px;
+}
+
+
+/* =========================
+   CALENDAR TOP
+========================= */
+
+.calendar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+
+.month-title {
+    font-size: 23px;
+    font-weight: 700;
+}
+
+
+.navigation {
+    display: flex;
+    gap: 8px;
+}
+
+
+.nav-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #29415f;
+    background: #12243b;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+
+.nav-btn:hover {
+    background: #1d3557;
+}
+
+
+/* =========================
+   WEEKDAYS
+========================= */
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 8px;
+}
+
+
+.weekday {
+    text-align: center;
+    color: #7891b1;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 0;
+}
+
+
+/* =========================
+   CALENDAR DAYS
+========================= */
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 7px;
+}
+
+
+.day {
+    min-height: 105px;
+    border: 1px solid #1b304a;
+    background: #0a182a;
+    border-radius: 12px;
+    padding: 9px;
+    cursor: pointer;
+    transition: 0.2s;
+    position: relative;
+}
+
+
+.day:hover {
+    background: #10253d;
+    border-color: #315b8d;
+    transform: translateY(-2px);
+}
+
+
+.day.other-month {
+    opacity: 0.3;
+}
+
+
+.day.today {
+    border: 2px solid #2563eb;
+}
+
+
+.day.selected {
+    background: #102b4b;
+    border-color: #4c8dff;
+}
+
+
+.day-number {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+
+.today .day-number {
+    background: #2563eb;
+    width: 27px;
+    height: 27px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================
+   EVENTS
+========================= */
+
+.event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+
+.event {
+    font-size: 11px;
+    padding: 4px 6px;
+    border-radius: 5px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    border-left: 3px solid;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+
+.event.blue {
+    border-color: #3b82f6;
+}
+
+
+.event.green {
+    border-color: #22c55e;
+}
+
+
+.event.yellow {
+    border-color: #eab308;
+}
+
+
+.event.red {
+    border-color: #ef4444;
+}
+
+
+.event.purple {
+    border-color: #a855f7;
+}
+
+
+.event.more {
+    color: #7db4ff;
+    border: none;
+    background: none;
+}
+
+
+/* =========================
+   AGENDA
+========================= */
+
+.agenda-card {
+    padding: 22px;
+}
+
+
+.agenda-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+
+.agenda-header h2 {
+    font-size: 20px;
+}
+
+
+.agenda-date {
+    color: #7f96b5;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+
+.agenda-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+/* AGENDA ITEM */
+
+.agenda-item {
+    background: #101f34;
+    border: 1px solid #1e344f;
+    border-radius: 12px;
+    padding: 14px;
+    position: relative;
+}
+
+
+.agenda-item-top {
+    display: flex;
+    gap: 10px;
+}
+
+
+.indicator {
+    width: 4px;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+
+
+.indicator.blue {
+    background: #3b82f6;
+}
+
+
+.indicator.green {
+    background: #22c55e;
+}
+
+
+.indicator.yellow {
+    background: #eab308;
+}
+
+
+.indicator.red {
+    background: #ef4444;
+}
+
+
+.indicator.purple {
+    background: #a855f7;
+}
+
+
+.agenda-info {
+    flex: 1;
+}
+
+
+.agenda-info h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+
+.agenda-info p {
+    font-size: 12px;
+    color: #8197b5;
+    line-height: 1.5;
+}
+
+
+.agenda-time {
+    font-size: 11px;
+    color: #6fa5ff;
+    margin-bottom: 4px;
+}
+
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.agenda-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+
+.small-btn {
+    border: none;
+    padding: 6px 9px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+
+.edit-btn {
+    background: #18385d;
+    color: #8fc0ff;
+}
+
+
+.delete-btn {
+    background: #451c25;
+    color: #ff8b9a;
+}
+
+
+.edit-btn:hover {
+    background: #24517e;
+}
+
+
+.delete-btn:hover {
+    background: #632633;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty {
+    text-align: center;
+    color: #6f86a5;
+    font-size: 13px;
+    padding: 30px 10px;
+}
+
+
+/* =========================
+   LEGEND
+========================= */
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #1d304b;
+}
+
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #8298b6;
+}
+
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+
+.blue-dot {
+    background: #3b82f6;
+}
+
+
+.green-dot {
+    background: #22c55e;
+}
+
+
+.yellow-dot {
+    background: #eab308;
+}
+
+
+.red-dot {
+    background: #ef4444;
+}
+
+
+.purple-dot {
+    background: #a855f7;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(2, 8, 18, 0.75);
+
+    backdrop-filter: blur(5px);
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    z-index: 100;
+}
+
+
+.modal.active {
+    display: flex;
+}
+
+
+.modal-box {
+    width: 100%;
+    max-width: 470px;
+
+    background: #0d1b2f;
+
+    border: 1px solid #29415f;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+
+    animation: modalIn 0.2s ease;
+}
+
+
+@keyframes modalIn {
+
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* MODAL HEADER */
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+
+.modal-header h2 {
+    font-size: 20px;
+}
+
+
+.close-btn {
+    width: 35px;
+    height: 35px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #142941;
+
+    color: #fff;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+
+.close-btn:hover {
+    background: #213b59;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 13px;
+
+    color: #9ab0cc;
+}
+
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    border: 1px solid #29415f;
+
+    background: #09182a;
+
+    color: white;
+
+    border-radius: 9px;
+
+    padding: 11px 12px;
+
+    outline: none;
+
+    font-size: 13px;
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #3b82f6;
+}
+
+
+.form-group textarea {
+    resize: vertical;
+}
+
+
+/* =========================
+   FORM BUTTONS
+========================= */
+
+.form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+
+.cancel-btn,
+.save-btn {
+    border: none;
+
+    padding: 11px 17px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    font-size: 13px;
+}
+
+
+.cancel-btn {
+    background: #172b43;
+    color: #a3b6cd;
+}
+
+
+.save-btn {
+    background: #2563eb;
+    color: white;
+}
+
+
+.cancel-btn:hover {
+    background: #203a58;
+}
+
+
+.save-btn:hover {
+    background: #1d4ed8;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .calendar-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    body {
+        padding: 15px;
+    }
+
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+
+    .add-btn {
+        width: 100%;
+    }
+
+
+    .calendar-card {
+        padding: 15px;
+    }
+
+
+    .day {
+        min-height: 80px;
+    }
+
+
+    .weekday {
+        font-size: 10px;
+    }
+
+
+    .event {
+        font-size: 9px;
+    }
+
+
+    .month-title {
+        font-size: 18px;
+    }
+
+}

@@ -6,6 +6,296 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Modern Calendar</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="title-area">
+            <h1>My Calendar</h1>
+            <p>Manage your schedule and events</p>
+        </div>
+
+        <button class="add-btn" id="addEventBtn">
+            + Add Event
+        </button>
+
+    </header>
+
+
+    <!-- MAIN CALENDAR -->
+    <main class="calendar-wrapper">
+
+        <!-- CALENDAR -->
+        <section class="calendar-card">
+
+            <div class="calendar-top">
+
+                <h2 class="month-title" id="monthTitle">
+                    September 2026
+                </h2>
+
+                <div class="navigation">
+
+                    <button class="nav-btn" id="prevMonth">
+                        ‹
+                    </button>
+
+                    <button class="nav-btn" id="todayBtn">
+                        ●
+                    </button>
+
+                    <button class="nav-btn" id="nextMonth">
+                        ›
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- DAYS OF WEEK -->
+            <div class="weekdays">
+
+                <div class="weekday">Sun</div>
+                <div class="weekday">Mon</div>
+                <div class="weekday">Tue</div>
+                <div class="weekday">Wed</div>
+                <div class="weekday">Thu</div>
+                <div class="weekday">Fri</div>
+                <div class="weekday">Sat</div>
+
+            </div>
+
+
+            <!-- CALENDAR -->
+            <div class="calendar" id="calendar"></div>
+
+
+            <!-- LEGEND -->
+            <div class="legend">
+
+                <div class="legend-item">
+                    <span class="legend-dot blue-dot"></span>
+                    Meeting
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-dot green-dot"></span>
+                    Personal
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-dot yellow-dot"></span>
+                    Important
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-dot red-dot"></span>
+                    Deadline
+                </div>
+
+                <div class="legend-item">
+                    <span class="legend-dot purple-dot"></span>
+                    Other
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- AGENDA -->
+        <aside class="agenda-card">
+
+            <div class="agenda-header">
+
+                <div>
+                    <h2>Agenda</h2>
+
+                    <p class="agenda-date" id="agendaDate">
+                        Select a date
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="agenda-list" id="agendaList">
+
+                <div class="empty">
+                    Click a date to see the agenda
+                </div>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+</div>
+
+
+<!-- EVENT MODAL -->
+<div class="modal" id="eventModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Add Event
+            </h2>
+
+            <button class="close-btn" id="closeModal">
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="eventForm">
+
+            <!-- EVENT TITLE -->
+            <div class="form-group">
+
+                <label for="eventTitle">
+                    Event Name
+                </label>
+
+                <input
+                    type="text"
+                    id="eventTitle"
+                    placeholder="Enter event name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- DATE -->
+            <div class="form-group">
+
+                <label for="eventDate">
+                    Date
+                </label>
+
+                <input
+                    type="date"
+                    id="eventDate"
+                    required
+                >
+
+            </div>
+
+
+            <!-- TIME -->
+            <div class="form-group">
+
+                <label for="eventTime">
+                    Time
+                </label>
+
+                <input
+                    type="time"
+                    id="eventTime"
+                >
+
+            </div>
+
+
+            <!-- CATEGORY -->
+            <div class="form-group">
+
+                <label for="eventCategory">
+                    Category
+                </label>
+
+                <select id="eventCategory">
+
+                    <option value="blue">
+                        Meeting
+                    </option>
+
+                    <option value="green">
+                        Personal
+                    </option>
+
+                    <option value="yellow">
+                        Important
+                    </option>
+
+                    <option value="red">
+                        Deadline
+                    </option>
+
+                    <option value="purple">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+            <div class="form-group">
+
+                <label for="eventDescription">
+                    Description
+                </label>
+
+                <textarea
+                    id="eventDescription"
+                    placeholder="Add event description..."
+                    rows="4"
+                ></textarea>
+
+            </div>
+
+
+            <!-- BUTTON -->
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    id="cancelBtn"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    Save Event
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
 </body>
 </html>
