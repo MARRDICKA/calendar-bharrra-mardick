@@ -1,11 +1,11 @@
 /* =====================================================
-   MODERN CALENDAR
+   NOVA CALENDAR
 ===================================================== */
 
 
-/* =========================
-   ELEMENTS
-========================= */
+/* =====================================================
+   ELEMENT
+===================================================== */
 
 const calendar =
     document.getElementById("calendar");
@@ -13,23 +13,41 @@ const calendar =
 const monthTitle =
     document.getElementById("monthTitle");
 
-const agendaList =
-    document.getElementById("agendaList");
+const monthButton =
+    document.getElementById("monthButton");
 
-const agendaDate =
-    document.getElementById("agendaDate");
+const monthPicker =
+    document.getElementById("monthPicker");
 
-const eventModal =
-    document.getElementById("eventModal");
+const pickerYear =
+    document.getElementById("pickerYear");
+
+const monthGrid =
+    document.getElementById("monthGrid");
+
+const eventOverlay =
+    document.getElementById("eventOverlay");
+
+const popupDate =
+    document.getElementById("popupDate");
+
+const popupDay =
+    document.getElementById("popupDay");
+
+const popupEventList =
+    document.getElementById("popupEventList");
+
+const eventView =
+    document.getElementById("eventView");
+
+const eventFormView =
+    document.getElementById("eventFormView");
 
 const eventForm =
     document.getElementById("eventForm");
 
-const modalTitle =
-    document.getElementById("modalTitle");
-
-const eventTitle =
-    document.getElementById("eventTitle");
+const eventName =
+    document.getElementById("eventName");
 
 const eventDate =
     document.getElementById("eventDate");
@@ -43,51 +61,51 @@ const eventCategory =
 const eventDescription =
     document.getElementById("eventDescription");
 
-const monthSelector =
-    document.getElementById("monthSelector");
-
-const monthPicker =
-    document.getElementById("monthPicker");
-
-const pickerYear =
-    document.getElementById("pickerYear");
-
-const monthsGrid =
-    document.getElementById("monthsGrid");
-
-const prevYear =
-    document.getElementById("prevYear");
-
-const nextYear =
-    document.getElementById("nextYear");
+const formTitle =
+    document.getElementById("formTitle");
 
 
-/* =========================
+/* =====================================================
    BUTTONS
-========================= */
+===================================================== */
 
-const addEventBtn =
-    document.getElementById("addEventBtn");
-
-const closeModal =
-    document.getElementById("closeModal");
-
-const cancelBtn =
-    document.getElementById("cancelBtn");
-
-const prevMonth =
-    document.getElementById("prevMonth");
+const previousMonth =
+    document.getElementById("previousMonth");
 
 const nextMonth =
     document.getElementById("nextMonth");
 
-const todayBtn =
-    document.getElementById("todayBtn");
+const todayButton =
+    document.getElementById("todayButton");
+
+const previousYear =
+    document.getElementById("previousYear");
+
+const nextYear =
+    document.getElementById("nextYear");
+
+const headerAdd =
+    document.getElementById("headerAdd");
+
+const popupAddButton =
+    document.getElementById("popupAddButton");
+
+const closePopup =
+    document.getElementById("closePopup");
+
+const formBack =
+    document.getElementById("formBack");
+
+const cancelForm =
+    document.getElementById("cancelForm");
+
+const backButton =
+    document.getElementById("backButton");
 
 
-/* =========================
+/* =====================================================
    DATE
-========================= */
+===================================================== */
 
 const today =
     new Date();
@@ -102,36 +120,171 @@ let currentYear =
 
 
 let selectedDate =
-    formatDate(today);
+    null;
 
-
-/* =========================
-   EDITING
-========================= */
 
 let editingEventId =
     null;
 
 
-/* =========================
-   STORAGE
-========================= */
+/* =====================================================
+   MONTH
+===================================================== */
+
+const monthNames = [
+
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+
+];
+
+
+/* =====================================================
+   CATEGORY
+===================================================== */
+
+const categoryNames = {
+
+    blue: "Meeting",
+
+    green: "Personal",
+
+    yellow: "Important",
+
+    red: "Deadline",
+
+    purple: "Other"
+
+};
+
+
+/* =====================================================
+   LOCAL STORAGE
+===================================================== */
 
 let events =
     JSON.parse(
         localStorage.getItem(
-            "calendarEvents"
+            "novaCalendarEvents"
         )
     ) || [];
 
 
 /* =====================================================
-   INITIALIZE
+   SAMPLE EVENTS
+===================================================== */
+
+if (
+    events.length === 0
+) {
+
+    events = [
+
+        {
+            id: "1",
+            title: "Design Review",
+            date: formatDate(
+                new Date(
+                    currentYear,
+                    currentMonth,
+                    2
+                )
+            ),
+            time: "09:00",
+            category: "purple",
+            description:
+                "Review desain terbaru."
+        },
+
+        {
+            id: "2",
+            title: "Team Meeting",
+            date: formatDate(
+                new Date(
+                    currentYear,
+                    currentMonth,
+                    2
+                )
+            ),
+            time: "11:00",
+            category: "blue",
+            description:
+                "Meeting bersama anggota team."
+        },
+
+        {
+            id: "3",
+            title: "Study Group",
+            date: formatDate(
+                new Date(
+                    currentYear,
+                    currentMonth,
+                    5
+                )
+            ),
+            time: "13:00",
+            category: "green",
+            description:
+                "Belajar bersama."
+        },
+
+        {
+            id: "4",
+            title: "Deadline Project",
+            date: formatDate(
+                new Date(
+                    currentYear,
+                    currentMonth,
+                    7
+                )
+            ),
+            time: "18:00",
+            category: "red",
+            description:
+                "Pengumpulan project."
+        },
+
+        {
+            id: "5",
+            title: "Important Task",
+            date: formatDate(
+                new Date(
+                    currentYear,
+                    currentMonth,
+                    7
+                )
+            ),
+            time: "10:00",
+            category: "yellow",
+            description:
+                "Menyelesaikan tugas penting."
+        }
+
+    ];
+
+
+    saveEvents();
+
+}
+
+
+/* =====================================================
+   INITIAL
 ===================================================== */
 
 renderCalendar();
 
-showAgenda(selectedDate);
+renderMonthPicker();
 
 
 /* =====================================================
@@ -167,30 +320,15 @@ function renderCalendar() {
         ).getDate();
 
 
-    const monthName =
-        new Date(
-            currentYear,
-            currentMonth
-        ).toLocaleDateString(
-            "en-US",
-            {
-                month: "long",
-                year: "numeric"
-            }
-        );
-
-
     monthTitle.textContent =
-        monthName;
+        `${monthNames[currentMonth]} ${currentYear}`;
 
 
     pickerYear.textContent =
         currentYear;
 
 
-    /* =========================
-       PREVIOUS MONTH
-    ========================= */
+    /* PREVIOUS MONTH */
 
     for (
         let i = firstDay - 1;
@@ -198,30 +336,28 @@ function renderCalendar() {
         i--
     ) {
 
-        const dayNumber =
+        const day =
             daysInPreviousMonth - i;
 
 
-        const previousDate =
+        const date =
             new Date(
                 currentYear,
                 currentMonth - 1,
-                dayNumber
+                day
             );
 
 
         createDay(
-            dayNumber,
-            previousDate,
+            day,
+            date,
             true
         );
 
     }
 
 
-    /* =========================
-       CURRENT MONTH
-    ========================= */
+    /* CURRENT MONTH */
 
     for (
         let day = 1;
@@ -246,25 +382,23 @@ function renderCalendar() {
     }
 
 
-    /* =========================
-       NEXT MONTH
-    ========================= */
+    /* NEXT MONTH */
 
-    const totalCells =
+    const total =
         calendar.children.length;
 
 
-    const remainingCells =
-        42 - totalCells;
+    const remaining =
+        42 - total;
 
 
     for (
         let day = 1;
-        day <= remainingCells;
+        day <= remaining;
         day++
     ) {
 
-        const nextDate =
+        const date =
             new Date(
                 currentYear,
                 currentMonth + 1,
@@ -274,7 +408,7 @@ function renderCalendar() {
 
         createDay(
             day,
-            nextDate,
+            date,
             true
         );
 
@@ -297,8 +431,15 @@ function createDay(
         document.createElement("div");
 
 
-    day.classList.add("day");
+    day.className =
+        "day";
 
+
+    const dateString =
+        formatDate(date);
+
+
+    /* OTHER MONTH */
 
     if (otherMonth) {
 
@@ -307,10 +448,6 @@ function createDay(
         );
 
     }
-
-
-    const dateString =
-        formatDate(date);
 
 
     /* TODAY */
@@ -341,9 +478,7 @@ function createDay(
     }
 
 
-    /* =========================
-       DAY NUMBER
-    ========================= */
+    /* NUMBER */
 
     const number =
         document.createElement("div");
@@ -357,12 +492,12 @@ function createDay(
         dayNumber;
 
 
-    day.appendChild(number);
+    day.appendChild(
+        number
+    );
 
 
-    /* =========================
-       EVENTS
-    ========================= */
+    /* EVENT LIST */
 
     const eventList =
         document.createElement("div");
@@ -373,36 +508,48 @@ function createDay(
 
 
     const dayEvents =
-        events.filter(
-            event =>
-                event.date ===
-                dateString
-        );
+        events
+            .filter(
+                event =>
+                    event.date ===
+                    dateString
+            )
+            .sort(
+                sortEvents
+            );
 
 
-    /* SHOW MAX 3 */
+    /* SHOW FIRST 3 */
 
     dayEvents
         .slice(0, 3)
-        .forEach(event => {
+        .forEach(
+            event => {
 
-            const eventElement =
-                document.createElement("div");
-
-
-            eventElement.className =
-                `event ${event.category}`;
-
-
-            eventElement.textContent =
-                event.title;
+                const eventElement =
+                    document.createElement(
+                        "div"
+                    );
 
 
-            eventList.appendChild(
-                eventElement
-            );
+                eventElement.className =
+                    `event ${event.category}`;
 
-        });
+
+                eventElement.textContent =
+                    event.title;
+
+
+                eventElement.title =
+                    event.title;
+
+
+                eventList.appendChild(
+                    eventElement
+                );
+
+            }
+        );
 
 
     /* MORE */
@@ -412,7 +559,9 @@ function createDay(
     ) {
 
         const more =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         more.className =
@@ -435,13 +584,11 @@ function createDay(
     );
 
 
-    /* =========================
+    /* =================================================
        CLICK DATE
        
-       IMPORTANT:
-       CLICKING DATE NOW
-       DIRECTLY OPENS MODAL
-    ========================= */
+       LANGSUNG BUKA POPUP EVENT
+    ================================================= */
 
     day.addEventListener(
         "click",
@@ -462,12 +609,7 @@ function createDay(
             renderCalendar();
 
 
-            showAgenda(
-                dateString
-            );
-
-
-            openAddModal(
+            openEventPopup(
                 dateString
             );
 
@@ -483,12 +625,16 @@ function createDay(
 
 
 /* =====================================================
-   SHOW AGENDA
+   OPEN EVENT POPUP
 ===================================================== */
 
-function showAgenda(
+function openEventPopup(
     dateString
 ) {
+
+    selectedDate =
+        dateString;
+
 
     const date =
         new Date(
@@ -497,86 +643,140 @@ function showAgenda(
         );
 
 
-    agendaDate.textContent =
+    /* DATE */
+
+    popupDate.textContent =
         date.toLocaleDateString(
             "en-US",
             {
-                weekday: "long",
-                day: "numeric",
                 month: "long",
+                day: "numeric",
                 year: "numeric"
             }
         );
 
 
-    const dayEvents =
-        events.filter(
-            event =>
-                event.date ===
-                dateString
+    /* DAY */
+
+    popupDay.textContent =
+        date.toLocaleDateString(
+            "en-US",
+            {
+                weekday: "long"
+            }
         );
 
 
-    agendaList.innerHTML =
+    /* RESET VIEW */
+
+    eventView.classList.remove(
+        "hidden"
+    );
+
+
+    eventFormView.classList.remove(
+        "active"
+    );
+
+
+    /* LOAD EVENTS */
+
+    renderPopupEvents();
+
+
+    /* OPEN */
+
+    eventOverlay.classList.add(
+        "active"
+    );
+
+}
+
+
+/* =====================================================
+   RENDER POPUP EVENTS
+===================================================== */
+
+function renderPopupEvents() {
+
+    popupEventList.innerHTML =
         "";
 
+
+    const dayEvents =
+        events
+            .filter(
+                event =>
+                    event.date ===
+                    selectedDate
+            )
+            .sort(
+                sortEvents
+            );
+
+
+    /* NO EVENTS */
 
     if (
         dayEvents.length === 0
     ) {
 
-        agendaList.innerHTML = `
-            <div class="empty">
-                No events on this date
+        popupEventList.innerHTML = `
+
+            <div class="empty-events">
+
+                <div class="empty-icon">
+                    ✦
+                </div>
+
+                <h3>
+                    No events yet
+                </h3>
+
+                <p>
+                    There are no events
+                    scheduled for this date.
+                </p>
+
             </div>
+
         `;
+
 
         return;
 
     }
 
 
-    /* SORT BY TIME */
-
-    dayEvents.sort(
-        (a, b) =>
-            (a.time || "")
-                .localeCompare(
-                    b.time || ""
-                )
-    );
-
+    /* EVENTS */
 
     dayEvents.forEach(
         (event, index) => {
 
-            const item =
+            const card =
                 document.createElement(
                     "div"
                 );
 
 
-            item.className =
-                "agenda-item";
+            card.className =
+                `popup-event ${event.category}`;
 
 
-            item.style.animationDelay =
-                `${index * 0.05}s`;
+            card.style.animationDelay =
+                `${index * .06}s`;
 
 
-            item.innerHTML = `
+            card.innerHTML = `
 
-                <div class="agenda-item-top">
+                <div class="event-icon">
+                    ●
+                </div>
 
-                    <div
-                        class="indicator ${event.category}"
-                    ></div>
 
-                    <div class="agenda-info">
+                <div class="popup-event-content">
 
-                        <div class="agenda-time">
-                            ${event.time || "All day"}
-                        </div>
+                    <div class="event-top">
 
                         <h3>
                             ${escapeHTML(
@@ -584,40 +784,103 @@ function showAgenda(
                             )}
                         </h3>
 
-                        <p>
-                            ${escapeHTML(
+                        <span
+                            class="category ${event.category}"
+                        >
+                            ${
+                                categoryNames[
+                                    event.category
+                                ]
+                            }
+                        </span>
+
+                    </div>
+
+
+                    <div class="event-time">
+
+                        ${
+                            event.time
+                                ? "◷ " + event.time
+                                : "All day"
+                        }
+
+                    </div>
+
+
+                    <div class="event-description">
+
+                        ${
+                            escapeHTML(
                                 event.description ||
                                 "No description"
-                            )}
-                        </p>
+                            )
+                        }
+
+                    </div>
+
+
+                    <div class="event-actions">
+
+                        <button
+                            class="edit-button"
+                            data-id="${event.id}"
+                        >
+                            Edit
+                        </button>
+
+                        <button
+                            class="delete-button"
+                            data-id="${event.id}"
+                        >
+                            Delete
+                        </button>
 
                     </div>
 
                 </div>
 
-
-                <div class="agenda-actions">
-
-                    <button
-                        class="small-btn edit-btn"
-                        onclick="editEvent('${event.id}')"
-                    >
-                        Edit
-                    </button>
-
-                    <button
-                        class="small-btn delete-btn"
-                        onclick="deleteEvent('${event.id}')"
-                    >
-                        Delete
-                    </button>
-
-                </div>
             `;
 
 
-            agendaList.appendChild(
-                item
+            /* EDIT */
+
+            card
+                .querySelector(
+                    ".edit-button"
+                )
+                .addEventListener(
+                    "click",
+                    () => {
+
+                        editEvent(
+                            event.id
+                        );
+
+                    }
+                );
+
+
+            /* DELETE */
+
+            card
+                .querySelector(
+                    ".delete-button"
+                )
+                .addEventListener(
+                    "click",
+                    () => {
+
+                        deleteEvent(
+                            event.id
+                        );
+
+                    }
+                );
+
+
+            popupEventList.appendChild(
+                card
             );
 
         }
@@ -627,58 +890,49 @@ function showAgenda(
 
 
 /* =====================================================
-   OPEN ADD MODAL
+   ADD EVENT BUTTON
 ===================================================== */
 
-function openAddModal(
-    date = selectedDate
-) {
-
-    editingEventId =
-        null;
-
-
-    modalTitle.textContent =
-        "Add Event";
-
-
-    eventForm.reset();
-
-
-    eventDate.value =
-        date ||
-        formatDate(today);
-
-
-    eventModal.classList.add(
-        "active"
-    );
-
-
-    /* FOCUS */
-
-    setTimeout(
-        () => {
-
-            eventTitle.focus();
-
-        },
-        200
-    );
-
-}
-
-
-/* =====================================================
-   ADD BUTTON
-===================================================== */
-
-addEventBtn.addEventListener(
+popupAddButton.addEventListener(
     "click",
     () => {
 
-        openAddModal(
+        openAddForm();
+
+    }
+);
+
+
+/* =====================================================
+   HEADER ADD
+===================================================== */
+
+headerAdd.addEventListener(
+    "click",
+    () => {
+
+        if (
+            !selectedDate
+        ) {
+
+            selectedDate =
+                formatDate(today);
+
+        }
+
+
+        openEventPopup(
             selectedDate
+        );
+
+
+        setTimeout(
+            () => {
+
+                openAddForm();
+
+            },
+            150
         );
 
     }
@@ -686,49 +940,47 @@ addEventBtn.addEventListener(
 
 
 /* =====================================================
-   CLOSE MODAL
+   OPEN ADD FORM
 ===================================================== */
 
-function closeEventModal() {
+function openAddForm() {
 
-    eventModal.classList.remove(
+    editingEventId =
+        null;
+
+
+    formTitle.textContent =
+        "Add Event";
+
+
+    eventForm.reset();
+
+
+    eventDate.value =
+        selectedDate ||
+        formatDate(today);
+
+
+    eventView.classList.add(
+        "hidden"
+    );
+
+
+    eventFormView.classList.add(
         "active"
     );
 
+
+    setTimeout(
+        () => {
+
+            eventName.focus();
+
+        },
+        150
+    );
+
 }
-
-
-closeModal.addEventListener(
-    "click",
-    closeEventModal
-);
-
-
-cancelBtn.addEventListener(
-    "click",
-    closeEventModal
-);
-
-
-/* =====================================================
-   CLICK OUTSIDE
-===================================================== */
-
-eventModal.addEventListener(
-    "click",
-    event => {
-
-        if (
-            event.target ===
-            eventModal
-        ) {
-
-            closeEventModal();
-
-        }
-
-    }
-);
 
 
 /* =====================================================
@@ -749,7 +1001,7 @@ eventForm.addEventListener(
                 Date.now().toString(),
 
             title:
-                eventTitle.value.trim(),
+                eventName.value.trim(),
 
             date:
                 eventDate.value,
@@ -766,9 +1018,7 @@ eventForm.addEventListener(
         };
 
 
-        /* =========================
-           EDIT
-        ========================= */
+        /* EDIT */
 
         if (
             editingEventId
@@ -776,19 +1026,16 @@ eventForm.addEventListener(
 
             events =
                 events.map(
-                    event =>
-                        event.id ===
+                    item =>
+                        item.id ===
                         editingEventId
                             ? newEvent
-                            : event
+                            : item
                 );
 
         }
 
-
-        /* =========================
-           ADD
-        ========================= */
+        /* ADD */
 
         else {
 
@@ -802,11 +1049,9 @@ eventForm.addEventListener(
         saveEvents();
 
 
-        /* =========================
-           MOVE CALENDAR
-        ========================= */
+        /* UPDATE CALENDAR */
 
-        const savedDate =
+        const newDate =
             new Date(
                 newEvent.date +
                 "T00:00:00"
@@ -814,11 +1059,11 @@ eventForm.addEventListener(
 
 
         currentMonth =
-            savedDate.getMonth();
+            newDate.getMonth();
 
 
         currentYear =
-            savedDate.getFullYear();
+            newDate.getFullYear();
 
 
         selectedDate =
@@ -828,12 +1073,11 @@ eventForm.addEventListener(
         renderCalendar();
 
 
-        showAgenda(
+        /* BACK TO EVENT LIST */
+
+        openEventPopup(
             selectedDate
         );
-
-
-        closeEventModal();
 
     }
 );
@@ -847,8 +1091,8 @@ function editEvent(id) {
 
     const event =
         events.find(
-            event =>
-                event.id === id
+            item =>
+                item.id === id
         );
 
 
@@ -859,11 +1103,11 @@ function editEvent(id) {
         event.id;
 
 
-    modalTitle.textContent =
+    formTitle.textContent =
         "Edit Event";
 
 
-    eventTitle.value =
+    eventName.value =
         event.title;
 
 
@@ -883,7 +1127,12 @@ function editEvent(id) {
         event.description;
 
 
-    eventModal.classList.add(
+    eventView.classList.add(
+        "hidden"
+    );
+
+
+    eventFormView.classList.add(
         "active"
     );
 
@@ -898,29 +1147,31 @@ function deleteEvent(id) {
 
     const event =
         events.find(
-            event =>
-                event.id === id
+            item =>
+                item.id === id
         );
 
 
     if (!event) return;
 
 
-    const confirmation =
+    const confirmDelete =
         confirm(
             `Delete "${event.title}"?`
         );
 
 
-    if (!confirmation) {
+    if (!confirmDelete) {
+
         return;
+
     }
 
 
     events =
         events.filter(
-            event =>
-                event.id !== id
+            item =>
+                item.id !== id
         );
 
 
@@ -930,32 +1181,105 @@ function deleteEvent(id) {
     renderCalendar();
 
 
-    showAgenda(
-        selectedDate
-    );
+    renderPopupEvents();
 
 }
 
 
 /* =====================================================
-   LOCAL STORAGE
+   FORM BACK
 ===================================================== */
 
-function saveEvents() {
+formBack.addEventListener(
+    "click",
+    () => {
 
-    localStorage.setItem(
-        "calendarEvents",
-        JSON.stringify(events)
+        eventFormView.classList.remove(
+            "active"
+        );
+
+
+        eventView.classList.remove(
+            "hidden"
+        );
+
+
+        renderPopupEvents();
+
+    }
+);
+
+
+/* =====================================================
+   CANCEL
+===================================================== */
+
+cancelForm.addEventListener(
+    "click",
+    () => {
+
+        eventFormView.classList.remove(
+            "active"
+        );
+
+
+        eventView.classList.remove(
+            "hidden"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   CLOSE POPUP
+===================================================== */
+
+closePopup.addEventListener(
+    "click",
+    closeEventPopup
+);
+
+
+function closeEventPopup() {
+
+    eventOverlay.classList.remove(
+        "active"
     );
 
+
+    editingEventId =
+        null;
+
 }
+
+
+/* =====================================================
+   CLICK OUTSIDE POPUP
+===================================================== */
+
+eventOverlay.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target ===
+            eventOverlay
+        ) {
+
+            closeEventPopup();
+
+        }
+
+    }
+);
 
 
 /* =====================================================
    PREVIOUS MONTH
 ===================================================== */
 
-prevMonth.addEventListener(
+previousMonth.addEventListener(
     "click",
     () => {
 
@@ -974,6 +1298,8 @@ prevMonth.addEventListener(
 
 
         renderCalendar();
+
+        renderMonthPicker();
 
     }
 );
@@ -1003,6 +1329,8 @@ nextMonth.addEventListener(
 
         renderCalendar();
 
+        renderMonthPicker();
+
     }
 );
 
@@ -1011,7 +1339,7 @@ nextMonth.addEventListener(
    TODAY
 ===================================================== */
 
-todayBtn.addEventListener(
+todayButton.addEventListener(
     "click",
     () => {
 
@@ -1029,8 +1357,10 @@ todayBtn.addEventListener(
 
         renderCalendar();
 
+        renderMonthPicker();
 
-        showAgenda(
+
+        openEventPopup(
             selectedDate
         );
 
@@ -1039,32 +1369,40 @@ todayBtn.addEventListener(
 
 
 /* =====================================================
-   MONTH & YEAR PICKER
+   BACK BUTTON
 ===================================================== */
 
-const monthNames = [
+backButton.addEventListener(
+    "click",
+    () => {
 
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-
-];
+        currentMonth--;
 
 
-/* =========================
-   OPEN PICKER
-========================= */
+        if (
+            currentMonth < 0
+        ) {
 
-monthSelector.addEventListener(
+            currentMonth = 11;
+
+            currentYear--;
+
+        }
+
+
+        renderCalendar();
+
+        renderMonthPicker();
+
+    }
+);
+
+
+/* =====================================================
+   MONTH SELECTOR
+===================================================== */
+
+monthButton.addEventListener(
     "click",
     event => {
 
@@ -1076,7 +1414,7 @@ monthSelector.addEventListener(
         );
 
 
-        monthSelector.classList.toggle(
+        monthButton.classList.toggle(
             "active"
         );
 
@@ -1087,9 +1425,9 @@ monthSelector.addEventListener(
 );
 
 
-/* =========================
-   RENDER MONTHS
-========================= */
+/* =====================================================
+   MONTH PICKER
+===================================================== */
 
 function renderMonthPicker() {
 
@@ -1097,7 +1435,7 @@ function renderMonthPicker() {
         currentYear;
 
 
-    monthsGrid.innerHTML =
+    monthGrid.innerHTML =
         "";
 
 
@@ -1146,7 +1484,7 @@ function renderMonthPicker() {
                     );
 
 
-                    monthSelector.classList.remove(
+                    monthButton.classList.remove(
                         "active"
                     );
 
@@ -1154,7 +1492,7 @@ function renderMonthPicker() {
             );
 
 
-            monthsGrid.appendChild(
+            monthGrid.appendChild(
                 button
             );
 
@@ -1164,11 +1502,11 @@ function renderMonthPicker() {
 }
 
 
-/* =========================
+/* =====================================================
    PREVIOUS YEAR
-========================= */
+===================================================== */
 
-prevYear.addEventListener(
+previousYear.addEventListener(
     "click",
     event => {
 
@@ -1178,18 +1516,17 @@ prevYear.addEventListener(
         currentYear--;
 
 
-        renderMonthPicker();
-
-
         renderCalendar();
+
+        renderMonthPicker();
 
     }
 );
 
 
-/* =========================
+/* =====================================================
    NEXT YEAR
-========================= */
+===================================================== */
 
 nextYear.addEventListener(
     "click",
@@ -1201,10 +1538,9 @@ nextYear.addEventListener(
         currentYear++;
 
 
-        renderMonthPicker();
-
-
         renderCalendar();
+
+        renderMonthPicker();
 
     }
 );
@@ -1222,7 +1558,7 @@ document.addEventListener(
             !monthPicker.contains(
                 event.target
             ) &&
-            !monthSelector.contains(
+            !monthButton.contains(
                 event.target
             )
         ) {
@@ -1232,7 +1568,7 @@ document.addEventListener(
             );
 
 
-            monthSelector.classList.remove(
+            monthButton.classList.remove(
                 "active"
             );
 
@@ -1240,6 +1576,36 @@ document.addEventListener(
 
     }
 );
+
+
+/* =====================================================
+   LOCAL STORAGE
+===================================================== */
+
+function saveEvents() {
+
+    localStorage.setItem(
+        "novaCalendarEvents",
+        JSON.stringify(events)
+    );
+
+}
+
+
+/* =====================================================
+   SORT
+===================================================== */
+
+function sortEvents(a, b) {
+
+    return (
+        (a.time || "")
+            .localeCompare(
+                b.time || ""
+            )
+    );
+
+}
 
 
 /* =====================================================
@@ -1309,7 +1675,7 @@ document.addEventListener(
             "Escape"
         ) {
 
-            closeEventModal();
+            closeEventPopup();
 
 
             monthPicker.classList.remove(
@@ -1317,7 +1683,7 @@ document.addEventListener(
             );
 
 
-            monthSelector.classList.remove(
+            monthButton.classList.remove(
                 "active"
             );
 

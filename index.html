@@ -1,387 +1,450 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Modern Calendar</title>
+    <title>Nova Calendar</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="container">
+    <div class="app">
 
-    <!-- HEADER -->
-    <header class="header">
+        <!-- ================= HEADER ================= -->
 
-        <div class="title-area">
-            <h1>My Calendar</h1>
-            <p>Manage your schedule and events</p>
-        </div>
+        <header class="header">
 
-        <button class="add-btn" id="addEventBtn">
-            <span>+</span> Add Event
-        </button>
+            <div class="brand">
 
-    </header>
-
-
-    <!-- MAIN -->
-    <main class="calendar-wrapper">
-
-        <!-- CALENDAR -->
-        <section class="calendar-card">
-
-            <div class="calendar-top">
-
-                <!-- MONTH & YEAR SELECTOR -->
-                <button class="month-selector" id="monthSelector">
-                    <span id="monthTitle">
-                        September 2026
-                    </span>
-
-                    <span class="dropdown-icon">
-                        ▾
-                    </span>
-                </button>
-
-
-                <!-- NAVIGATION -->
-                <div class="navigation">
-
-                    <button
-                        class="nav-btn"
-                        id="prevMonth"
-                        title="Previous month"
-                    >
-                        ‹
-                    </button>
-
-                    <button
-                        class="nav-btn today-btn"
-                        id="todayBtn"
-                        title="Today"
-                    >
-                        ●
-                    </button>
-
-                    <button
-                        class="nav-btn"
-                        id="nextMonth"
-                        title="Next month"
-                    >
-                        ›
-                    </button>
-
+                <div class="logo">
+                    ML
                 </div>
-
-            </div>
-
-
-            <!-- MONTH YEAR PICKER -->
-
-            <div
-                class="month-picker"
-                id="monthPicker"
-            >
-
-                <div class="picker-header">
-
-                    <button
-                        class="picker-year-btn"
-                        id="prevYear"
-                    >
-                        ‹
-                    </button>
-
-                    <span id="pickerYear">
-                        2026
-                    </span>
-
-                    <button
-                        class="picker-year-btn"
-                        id="nextYear"
-                    >
-                        ›
-                    </button>
-
-                </div>
-
-
-                <div
-                    class="months-grid"
-                    id="monthsGrid"
-                ></div>
-
-            </div>
-
-
-            <!-- WEEKDAYS -->
-
-            <div class="weekdays">
-
-                <div class="weekday">Sun</div>
-                <div class="weekday">Mon</div>
-                <div class="weekday">Tue</div>
-                <div class="weekday">Wed</div>
-                <div class="weekday">Thu</div>
-                <div class="weekday">Fri</div>
-                <div class="weekday">Sat</div>
-
-            </div>
-
-
-            <!-- CALENDAR -->
-
-            <div
-                class="calendar"
-                id="calendar"
-            ></div>
-
-
-            <!-- LEGEND -->
-
-            <div class="legend">
-
-                <div class="legend-item">
-                    <span class="legend-dot blue-dot"></span>
-                    Meeting
-                </div>
-
-                <div class="legend-item">
-                    <span class="legend-dot green-dot"></span>
-                    Personal
-                </div>
-
-                <div class="legend-item">
-                    <span class="legend-dot yellow-dot"></span>
-                    Important
-                </div>
-
-                <div class="legend-item">
-                    <span class="legend-dot red-dot"></span>
-                    Deadline
-                </div>
-
-                <div class="legend-item">
-                    <span class="legend-dot purple-dot"></span>
-                    Other
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- AGENDA -->
-
-        <aside class="agenda-card">
-
-            <div class="agenda-header">
 
                 <div>
-
-                    <h2>Agenda</h2>
-
-                    <p
-                        class="agenda-date"
-                        id="agendaDate"
-                    >
-                        Select a date
-                    </p>
-
+                    <h1>Mpoenlendar</h1>
+                    <p>Plan your days better</p>
                 </div>
-
-            </div>
-
-
-            <div
-                class="agenda-list"
-                id="agendaList"
-            >
-
-                <div class="empty">
-                    Click a date to add an event
-                </div>
-
-            </div>
-
-        </aside>
-
-    </main>
-
-</div>
-
-
-<!-- EVENT MODAL -->
-
-<div
-    class="modal"
-    id="eventModal"
->
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-
-            <div>
-
-                <h2 id="modalTitle">
-                    Add Event
-                </h2>
-
-                <p class="modal-subtitle">
-                    Create a new calendar event
-                </p>
 
             </div>
 
             <button
-                class="close-btn"
-                id="closeModal"
+                class="header-add"
+                id="headerAdd"
             >
-                ×
+                <span>+</span>
+                Add Event
             </button>
 
-        </div>
+        </header>
 
 
-        <form id="eventForm">
+        <!-- ================= MAIN ================= -->
 
-            <!-- TITLE -->
+        <main class="main">
 
-            <div class="form-group">
+            <section class="calendar-wrapper">
 
-                <label for="eventTitle">
-                    Event Name
-                </label>
+                <!-- CALENDAR TOP -->
 
-                <input
-                    type="text"
-                    id="eventTitle"
-                    placeholder="Enter event name"
-                    required
-                >
+                <div class="calendar-top">
 
-            </div>
+                    <button
+                        class="back-button"
+                        id="backButton"
+                    >
+                        ←
+                    </button>
 
 
-            <!-- DATE -->
+                    <div class="month-container">
 
-            <div class="form-group">
+                        <button
+                            class="month-button"
+                            id="monthButton"
+                        >
 
-                <label for="eventDate">
-                    Date
-                </label>
+                            <span id="monthTitle">
+                                September 2026
+                            </span>
 
-                <input
-                    type="date"
-                    id="eventDate"
-                    required
-                >
+                            <span class="chevron">
+                                ▾
+                            </span>
 
-            </div>
-
-
-            <!-- TIME -->
-
-            <div class="form-group">
-
-                <label for="eventTime">
-                    Time
-                </label>
-
-                <input
-                    type="time"
-                    id="eventTime"
-                >
-
-            </div>
+                        </button>
 
 
-            <!-- CATEGORY -->
+                        <!-- MONTH YEAR PICKER -->
 
-            <div class="form-group">
+                        <div
+                            class="month-picker"
+                            id="monthPicker"
+                        >
 
-                <label for="eventCategory">
-                    Category
-                </label>
+                            <div class="year-control">
 
-                <select id="eventCategory">
+                                <button id="previousYear">
+                                    ‹
+                                </button>
 
-                    <option value="blue">
+                                <strong id="pickerYear">
+                                    2026
+                                </strong>
+
+                                <button id="nextYear">
+                                    ›
+                                </button>
+
+                            </div>
+
+
+                            <div
+                                class="month-grid"
+                                id="monthGrid"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="calendar-navigation">
+
+                        <button
+                            class="nav-button"
+                            id="previousMonth"
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            class="today-button"
+                            id="todayButton"
+                        >
+                            Today
+                        </button>
+
+                        <button
+                            class="nav-button"
+                            id="nextMonth"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- WEEK -->
+
+                <div class="week">
+
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+
+                </div>
+
+
+                <!-- CALENDAR -->
+
+                <div
+                    class="calendar"
+                    id="calendar"
+                ></div>
+
+
+                <!-- LEGEND -->
+
+                <div class="legend">
+
+                    <div>
+                        <span class="dot blue"></span>
                         Meeting
-                    </option>
+                    </div>
 
-                    <option value="green">
+                    <div>
+                        <span class="dot green"></span>
                         Personal
-                    </option>
+                    </div>
 
-                    <option value="yellow">
+                    <div>
+                        <span class="dot yellow"></span>
                         Important
-                    </option>
+                    </div>
 
-                    <option value="red">
+                    <div>
+                        <span class="dot red"></span>
                         Deadline
-                    </option>
+                    </div>
 
-                    <option value="purple">
+                    <div>
+                        <span class="dot purple"></span>
                         Other
-                    </option>
+                    </div>
 
-                </select>
+                </div>
 
-            </div>
+            </section>
 
-
-            <!-- DESCRIPTION -->
-
-            <div class="form-group">
-
-                <label for="eventDescription">
-                    Description
-                </label>
-
-                <textarea
-                    id="eventDescription"
-                    placeholder="Add event description..."
-                    rows="4"
-                ></textarea>
-
-            </div>
-
-
-            <!-- ACTION -->
-
-            <div class="form-actions">
-
-                <button
-                    type="button"
-                    class="cancel-btn"
-                    id="cancelBtn"
-                >
-                    Cancel
-                </button>
-
-                <button
-                    type="submit"
-                    class="save-btn"
-                >
-                    Save Event
-                </button>
-
-            </div>
-
-        </form>
+        </main>
 
     </div>
 
-</div>
+
+    <!-- ==================================================
+         EVENT POPUP
+    ================================================== -->
+
+    <div
+        class="overlay"
+        id="eventOverlay"
+    >
+
+        <div class="event-popup">
+
+            <!-- POPUP HEADER -->
+
+            <div class="popup-header">
+
+                <div>
+
+                    <span class="popup-small">
+                        CALENDAR
+                    </span>
+
+                    <h2 id="popupDate">
+                        September 14, 2026
+                    </h2>
+
+                    <p id="popupDay">
+                        Monday
+                    </p>
+
+                </div>
 
 
-<script src="script.js"></script>
+                <button
+                    class="close-button"
+                    id="closePopup"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- EVENT VIEW -->
+
+            <div
+                class="event-view"
+                id="eventView"
+            >
+
+                <div
+                    class="popup-event-list"
+                    id="popupEventList"
+                ></div>
+
+
+                <!-- ADD EVENT BUTTON -->
+
+                <button
+                    class="popup-add-button"
+                    id="popupAddButton"
+                >
+
+                    <span>+</span>
+
+                    Add Event
+
+                </button>
+
+            </div>
+
+
+            <!-- ==========================================
+                 ADD / EDIT FORM
+            =========================================== -->
+
+            <div
+                class="event-form-view"
+                id="eventFormView"
+            >
+
+                <form id="eventForm">
+
+                    <div class="form-title">
+
+                        <div>
+
+                            <span class="popup-small">
+                                EVENT
+                            </span>
+
+                            <h2 id="formTitle">
+                                Add Event
+                            </h2>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="close-button"
+                            id="formBack"
+                        >
+                            ←
+                        </button>
+
+                    </div>
+
+
+                    <!-- EVENT NAME -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Event Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="eventName"
+                            placeholder="e.g. Team Meeting"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- DATE / TIME -->
+
+                    <div class="form-row">
+
+                        <div class="input-group">
+
+                            <label>
+                                Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="eventDate"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="input-group">
+
+                            <label>
+                                Time
+                            </label>
+
+                            <input
+                                type="time"
+                                id="eventTime"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <select id="eventCategory">
+
+                            <option value="blue">
+                                Meeting
+                            </option>
+
+                            <option value="green">
+                                Personal
+                            </option>
+
+                            <option value="yellow">
+                                Important
+                            </option>
+
+                            <option value="red">
+                                Deadline
+                            </option>
+
+                            <option value="purple">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Description
+                        </label>
+
+                        <textarea
+                            id="eventDescription"
+                            rows="4"
+                            placeholder="Add event details..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
+                    <div class="form-buttons">
+
+                        <button
+                            type="button"
+                            class="cancel-button"
+                            id="cancelForm"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="save-button"
+                        >
+                            Save Event
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
