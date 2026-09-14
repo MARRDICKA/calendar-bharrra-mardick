@@ -604,7 +604,11 @@ body {
 
 .day.other-month {
 
-    opacity: .27;
+     background:
+        rgba(7, 21, 39, 0);
+    
+    border-color:
+        #2d578040;
 }
 
 
