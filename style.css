@@ -624,19 +624,12 @@ body {
         #fdfbee;
 
     background:
-        #0c1f3a;
+        #0c1f3a00;
 
     box-shadow:
         0 0 0 1px
         rgba(57,126,255,.2);
-}
-
-
-.day.today {
-
-    border-color:
-        #fdfbee;
-}
+}   
 
 
 /* =====================================================
@@ -1749,9 +1742,9 @@ body {
 
 .cancel-button {
 
-    background: #162d48;
+    background: #fb2542;
 
-    color: #8fa7c4;
+    color: #fafcff;
 }
 
 
