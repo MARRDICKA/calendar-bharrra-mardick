@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Nova Calendar</title>
+    <title>Tugas Pak Yudi</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -21,20 +21,17 @@
             <div class="brand">
 
                 <div class="logo">
-                    ML
+                    <i>ML </i>
                 </div>
 
                 <div>
                     <h1>Mpoenlendar</h1>
-                    <p>Plan your days better</p>
+                    <p>Plan your next steps</p>
                 </div>
 
             </div>
 
-            <button
-                class="header-add"
-                id="headerAdd"
-            >
+            <button class="header-add" id="headerAdd">
                 <span>+</span>
                 Add Event
             </button>
@@ -52,20 +49,14 @@
 
                 <div class="calendar-top">
 
-                    <button
-                        class="back-button"
-                        id="backButton"
-                    >
+                    <button class="back-button" id="backButton">
                         ←
                     </button>
 
 
                     <div class="month-container">
 
-                        <button
-                            class="month-button"
-                            id="monthButton"
-                        >
+                        <button class="month-button" id="monthButton">
 
                             <span id="monthTitle">
                                 September 2026
@@ -80,10 +71,7 @@
 
                         <!-- MONTH YEAR PICKER -->
 
-                        <div
-                            class="month-picker"
-                            id="monthPicker"
-                        >
+                        <div class="month-picker" id="monthPicker">
 
                             <div class="year-control">
 
@@ -102,10 +90,7 @@
                             </div>
 
 
-                            <div
-                                class="month-grid"
-                                id="monthGrid"
-                            ></div>
+                            <div class="month-grid" id="monthGrid"></div>
 
                         </div>
 
@@ -114,24 +99,15 @@
 
                     <div class="calendar-navigation">
 
-                        <button
-                            class="nav-button"
-                            id="previousMonth"
-                        >
+                        <button class="nav-button" id="previousMonth">
                             ‹
                         </button>
 
-                        <button
-                            class="today-button"
-                            id="todayButton"
-                        >
+                        <button class="today-button" id="todayButton">
                             Today
                         </button>
 
-                        <button
-                            class="nav-button"
-                            id="nextMonth"
-                        >
+                        <button class="nav-button" id="nextMonth">
                             ›
                         </button>
 
@@ -157,10 +133,7 @@
 
                 <!-- CALENDAR -->
 
-                <div
-                    class="calendar"
-                    id="calendar"
-                ></div>
+                <div class="calendar" id="calendar"></div>
 
 
                 <!-- LEGEND -->
@@ -205,10 +178,7 @@
          EVENT POPUP
     ================================================== -->
 
-    <div
-        class="overlay"
-        id="eventOverlay"
-    >
+    <div class="overlay" id="eventOverlay">
 
         <div class="event-popup">
 
@@ -233,10 +203,7 @@
                 </div>
 
 
-                <button
-                    class="close-button"
-                    id="closePopup"
-                >
+                <button class="close-button" id="closePopup">
                     ×
                 </button>
 
@@ -245,23 +212,14 @@
 
             <!-- EVENT VIEW -->
 
-            <div
-                class="event-view"
-                id="eventView"
-            >
+            <div class="event-view" id="eventView">
 
-                <div
-                    class="popup-event-list"
-                    id="popupEventList"
-                ></div>
+                <div class="popup-event-list" id="popupEventList"></div>
 
 
                 <!-- ADD EVENT BUTTON -->
 
-                <button
-                    class="popup-add-button"
-                    id="popupAddButton"
-                >
+                <button class="popup-add-button" id="popupAddButton">
 
                     <span>+</span>
 
@@ -276,10 +234,7 @@
                  ADD / EDIT FORM
             =========================================== -->
 
-            <div
-                class="event-form-view"
-                id="eventFormView"
-            >
+            <div class="event-form-view" id="eventFormView">
 
                 <form id="eventForm">
 
@@ -297,11 +252,7 @@
 
                         </div>
 
-                        <button
-                            type="button"
-                            class="close-button"
-                            id="formBack"
-                        >
+                        <button type="button" class="close-button" id="formBack">
                             ←
                         </button>
 
@@ -316,12 +267,7 @@
                             Event Name
                         </label>
 
-                        <input
-                            type="text"
-                            id="eventName"
-                            placeholder="e.g. Team Meeting"
-                            required
-                        >
+                        <input type="text" id="eventName" placeholder="e.g. Team Meeting" required>
 
                     </div>
 
@@ -336,11 +282,7 @@
                                 Date
                             </label>
 
-                            <input
-                                type="date"
-                                id="eventDate"
-                                required
-                            >
+                            <input type="date" id="eventDate" required>
 
                         </div>
 
@@ -351,10 +293,7 @@
                                 Time
                             </label>
 
-                            <input
-                                type="time"
-                                id="eventTime"
-                            >
+                            <input type="time" id="eventTime">
 
                         </div>
 
@@ -404,11 +343,7 @@
                             Description
                         </label>
 
-                        <textarea
-                            id="eventDescription"
-                            rows="4"
-                            placeholder="Add event details..."
-                        ></textarea>
+                        <textarea id="eventDescription" rows="4" placeholder="Add event details..."></textarea>
 
                     </div>
 
@@ -417,18 +352,11 @@
 
                     <div class="form-buttons">
 
-                        <button
-                            type="button"
-                            class="cancel-button"
-                            id="cancelForm"
-                        >
+                        <button type="button" class="cancel-button" id="cancelForm">
                             Cancel
                         </button>
 
-                        <button
-                            type="submit"
-                            class="save-button"
-                        >
+                        <button type="submit" class="save-button">
                             Save Event
                         </button>
 

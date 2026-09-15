@@ -24,11 +24,11 @@ body {
 
         radial-gradient(
             circle at 80% 0%,
-            rgba(37, 99, 235, .18),
-            transparent 35%
+            #114261,
+            transparent 100%
         ),
 
-        #050d1b;
+        #15253f;
 }
 
 
@@ -49,10 +49,10 @@ body {
     justify-content: space-between;
 
     background:
-        rgba(5, 16, 32, .85);
+        #15253f;
 
     border-bottom:
-        1px solid #142944;
+        1px solid #15253f;
 
     backdrop-filter:
         blur(15px);
@@ -213,11 +213,11 @@ body {
 
     height: 40px;
 
-    border: 1px solid #1b3655;
+    border: 1px solid #15253f;
 
     border-radius: 9px;
 
-    background: #09192c;
+    background: #15253f;
 
     color: #89a5c9;
 
@@ -226,12 +226,14 @@ body {
     cursor: pointer;
 
     transition: .2s;
+
+    
 }
 
 
 .back-button:hover {
 
-    background: #122b47;
+    background: #15253f;
 
     color: white;
 
@@ -566,12 +568,12 @@ body {
     padding: 10px;
 
     border:
-        1px solid #152f4c;
+        3px solid #1e223d;
 
     border-radius: 11px;
 
     background:
-        rgba(7, 21, 39, .8);
+        #89b9e67e;
 
     cursor: pointer;
 
@@ -604,17 +606,25 @@ body {
 
 .day.other-month {
 
-    opacity: .27;
+    background:
+        #354e6b;
+    
+    border-color:
+        #2d578077;
+
+    box-shadow:
+        0 9px 22px
+        rgba(0,0,0,.2);
 }
 
 
 .day.selected {
 
     border-color:
-        #397eff;
+        #fdfbee;
 
     background:
-        #0c2644;
+        #0c1f3a;
 
     box-shadow:
         0 0 0 1px
@@ -625,7 +635,7 @@ body {
 .day.today {
 
     border-color:
-        #2563eb;
+        #fdfbee;
 }
 
 
@@ -743,10 +753,10 @@ body {
 
 .event.blue {
 
-    color: #65a1ff;
+    color: #fffdf7;
 
     background:
-        rgba(37,99,235,.17);
+        #2564ebaa;
 
     border-left:
         2px solid #347cff;
@@ -757,10 +767,10 @@ body {
 
 .event.green {
 
-    color: #39d6ad;
+    color: #fffdf7;
 
     background:
-        rgba(16,185,129,.14);
+        #10b981aa;
 
     border-left:
         2px solid #18c79d;
@@ -771,10 +781,10 @@ body {
 
 .event.yellow {
 
-    color: #f1c84d;
+    color: #fffdf7;
 
     background:
-        rgba(234,179,8,.13);
+        #eab308aa;
 
     border-left:
         2px solid #eab308;
@@ -785,10 +795,10 @@ body {
 
 .event.red {
 
-    color: #ff6882;
+    color: #fffdf7;
 
     background:
-        rgba(239,68,68,.14);
+        #ef4444aa;
 
     border-left:
         2px solid #ef4261;
@@ -799,10 +809,10 @@ body {
 
 .event.purple {
 
-    color: #b679ff;
+    color: #fffdf7;
 
     background:
-        rgba(168,85,247,.15);
+        #a855f7aa;
 
     border-left:
         2px solid #a855f7;
