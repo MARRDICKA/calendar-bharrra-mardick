@@ -606,7 +606,6 @@ body {
 
 .day.other-month {
 
-<<<<<<< HEAD
     background:
         #354e6b;
     
@@ -616,13 +615,6 @@ body {
     box-shadow:
         0 9px 22px
         rgba(0,0,0,.2);
-=======
-     background:
-        rgba(7, 21, 39, 0);
-    
-    border-color:
-        #2d578040;
->>>>>>> 84120b4bed3ba1432f5151d2f61adcfa9e80b25a
 }
 
 
@@ -677,7 +669,7 @@ body {
 
 .day.today .day-number {
 
-    background: #2563eb;
+    background: #53a9fe;
 
     color: white;
 
