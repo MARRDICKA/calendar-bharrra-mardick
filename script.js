@@ -1360,9 +1360,9 @@ todayButton.addEventListener(
         renderMonthPicker();
 
         //kalo diklik tombol today, langsung buka popup event untuk tanggal hari ini
-        openEventPopup(
-            selectedDate
-        );
+        // openEventPopup(
+        //     selectedDate
+        // );
 
     }
 );
